@@ -1,0 +1,8 @@
+{
+  "sepolia": {
+    "ChainGHOn": {
+      "address": "0xdC35246615E60885020bfD44C997aaE7fB0006D3",
+      "startBlock": 5129928
+    }
+  }
+}

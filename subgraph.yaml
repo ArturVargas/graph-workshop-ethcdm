@@ -1,0 +1,38 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: ChainGHOn
+    network: sepolia
+    source:
+      address: "0xdC35246615E60885020bfD44C997aaE7fB0006D3"
+      abi: ChainGHOn
+      startBlock: 5129928
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - CollateralDeposit
+        - GHODelegate
+        - MintedGHO
+        - OwnershipTransferred
+        - Withdrawal
+      abis:
+        - name: ChainGHOn
+          file: ./abis/ChainGHOn.json
+      eventHandlers:
+        - event: CollateralDeposit(indexed address,uint256,uint256)
+          handler: handleCollateralDeposit
+        - event: GHODelegate(indexed address,uint256,indexed address)
+          handler: handleGHODelegate
+        - event: MintedGHO(indexed address,uint256,uint256)
+          handler: handleMintedGHO
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Withdrawal(indexed address,uint256,uint256)
+          handler: handleWithdrawal
+      file: ./src/chain-gh-on.ts
